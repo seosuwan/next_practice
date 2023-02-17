@@ -1,10 +1,19 @@
+import { useEffect, useState } from "react";
 // const staticPage = (time: string) => {
 // const staticPage = (props: { time: string }) => {
-const staticPage = (props: { time: string }) => {
-  console.log("1");
-  //   return <div>{time}</div>;
-  return <div>getStaticProps입니다. 이게 바뀌면 큰일 나겠죠?{props.time}</div>;
+const StaticPage = (props: { time: string }) => {
+  const [currentTime, setCurrentTime] = useState('');
+  
+  useEffect(()=>setCurrentTime(new Date().toString()), []);
+
+  return (
+    <>
+      <div>getStaticProps입니다. 이게 바뀌면 큰일 나겠죠?{props.time}</div>
+      <div>이건 그냥 날짜에요... {currentTime} </div>
+    </>
+  );
 };
+
 
 export const getStaticProps = async () => {
   //   const curr = new Date();
@@ -22,4 +31,4 @@ export const getStaticProps = async () => {
   return { props: { time: new Date().toString() } };
 };
 
-export default staticPage;
+export default StaticPage;
